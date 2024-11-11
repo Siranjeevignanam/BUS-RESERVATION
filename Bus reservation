@@ -1,46 +1,47 @@
 package busResv;
-
-import java.util.Scanner; 
-import java.util.ArrayList;
-
-public class BusReservation {
-
-	public static void main(String[] args) {
-		
+import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat; 
+public class Booking {
+	String passengerName;
+	int busNo;
+	Date date;
 	
-		ArrayList<Bus> buses = new ArrayList<Bus>();
-		ArrayList<Booking> bookings = new ArrayList<Booking>();
-		
-		buses.add(new Bus(1,true,20,Coimbatore,Chennai));
-		buses.add(new Bus(2,true,25,Delhi,Mumbai));
-		buses.add(new Bus(3,false,40,Pune,Nagpur));
-                              buses.add(new Bus(4,false,45,Ranchi,Lucknow));
-		buses.add(new Bus(5,true,30,Banglore,Mysore));
-		buses.add(new Bus(6,false,50,Thanjavur,Kanyakumari));
-
-		
-		int userOptionion = 1;
+	Booking(){
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("Passenger name: ");
+		passengerName = scanner.next();
+		System.out.println("Enter bus no: ");
+		busNo = scanner.nextInt();
+		System.out.println("Enter date:dd-mm-yyyy");
+		String dateInput = scanner.next();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		
-		for(Bus b:buses) {
-			b.displayBusInfo();
+		try {
+			date = dateFormat.parse(dateInput);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		while(userOptionion==1) {
-			System.out.println("Enter 1 to Book tickets");
-                                       System.out.println("Enter 2 to exit from the process");
-			userOption = scanner.nextInt();
-			if(userOption == 1) {
-				Booking booking = new Booking();
-				if(booking.isAvailable(bookings,buses)) {
-					bookings.add(booking);
-					System.out.println("Your booking is confirmed,Bon Voyage.");
-				}
-				else
-					System.out.println("Sorry. This Bus is full. Try another bus or date.");
+	}
+	
+	
+public boolean isAvailable(ArrayList<Booking> bookings, ArrayList<Bus> buses) {
+		int capacity = 0;
+		for(Bus bus:buses) {
+			if(bus.getBusNo() == busNo)
+				capacity = bus.getCapacity();
+		}
+		
+		int booked = 0;
+		for(Booking b:bookings) {
+			if(b.busNo == busNo && b.date.equals(date)) {
+				booked++;
 			}
 		}
+		
+		return booked<capacity?true:false;
+		
 	}
-
 }
-
