@@ -1,46 +1,61 @@
 package busResv;
 
-import java.util.Scanner; 
-import java.util.ArrayList;
-
-public class BusReservation {
-
-	public static void main(String[] args) {
-		
+public class Bus {
+	private int busNo;
+	private boolean ac;
+	private int capacity; //getter and setter methods
+              private String Beginning;
+              private String Destination;
 	
-		ArrayList<Bus> buses = new ArrayList<Bus>();
-		ArrayList<Booking> bookings = new ArrayList<Booking>();
-		
-		buses.add(new Bus(1,true,20,Coimbatore,Chennai));
-		buses.add(new Bus(2,true,25,Delhi,Mumbai));
-		buses.add(new Bus(3,false,40,Pune,Nagpur));
-                              buses.add(new Bus(4,false,45,Ranchi,Lucknow));
-		buses.add(new Bus(5,true,30,Banglore,Mysore));
-		buses.add(new Bus(6,false,50,Thanjavur,Kanyakumari));
-
-		
-		int userOptionion = 1;
-		Scanner scanner = new Scanner(System.in);
-		
-		for(Bus b:buses) {
-			b.displayBusInfo();
-		}
-		
-		while(userOptionion==1) {
-			System.out.println("Enter 1 to Book tickets");
-                                       System.out.println("Enter 2 to exit from the process");
-			userOption = scanner.nextInt();
-			if(userOption == 1) {
-				Booking booking = new Booking();
-				if(booking.isAvailable(bookings,buses)) {
-					bookings.add(booking);
-					System.out.println("Your booking is confirmed,Bon Voyage.");
-				}
-				else
-					System.out.println("Sorry. This Bus is full. Try another bus or date.");
-			}
-		}
+	Bus(int no,boolean ac,int cap,String Begin,String Des){
+		this.busNo = no;
+		this.ac = ac;
+		this.capacity = cap;
+this.Beginning=Begin;
+this.Destination=Des;
+	}
+	
+	public int getBusNo(){ 
+		return busNo;
+	}
+	
+	public boolean isAc(){
+		return ac;
+	}
+	public int getCapacity(){ 
+		return capacity;
 	}
 
-}
 
+public String getBeginning(){ 
+		return Beginning;
+	}
+	
+public String getDestination(){ 
+		return Destination;
+	}
+	
+
+	
+	public void setAc(boolean val) { 
+		ac = val;
+	}
+	
+	public void setCapacity(int cap) { 
+		capacity = cap;
+	}
+	public void setBeginning(String Begin) { 
+		Beginning=Begin;
+	}
+public void setDestination(int cap) { 
+		Destination=Des;
+	}
+
+	public void displayBusInfo(){
+		System.out.println("Bus No:" + busNo);        
+ System.out.println("" AC:" + ac);
+System.out.println" Total Capacity: " + capacity);
+System.out.println("Beginning:" + Beginning);
+System.out.println("Destination: " + capacity);
+	}
+}
